@@ -1,0 +1,353 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>简单的EFHelper | itwangaijava</title>
+
+<link rel="shortcut icon" href="https://itwangaijava.github.io/favicon.ico?v=1698806005922">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itwangaijava.github.io/styles/main.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages//dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            itwangaijava
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
+                
+                <a href="/" class="menu gt-a-link">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/tags" class="menu gt-a-link">
+                    标签
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/about" class="menu gt-a-link">
+                    关于
+                </a>
+                
+            </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1698806005922"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = () => {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    简单的EFHelper
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2022-03-25 ·
+                    </time>
+                    
+                        <a href="https://itwangaijava.github.io/tag/bftlFwBmA/" class="post-tags">
+                            # C#
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>using System;<br>
+using System.Collections.Generic;<br>
+using System.Data.Entity;<br>
+using System.Linq;<br>
+using System.Linq.Expressions;<br>
+using System.Text;<br>
+using System.Threading.Tasks;<br>
+using System.Data;<br>
+using System.Data.SqlClient;</p>
+<p>namespace DAL<br>
+{</p>
+<pre><code>//new():实例化对象，对泛型的约束
+public class EFHelper&lt;TDataBase&gt; where TDataBase : DbContext,new()
+{
+    static EFHelper&lt;TDataBase&gt; instance = null;
+    //私有化构造函数 EF(Entity FrameWork):DatabaseFirst,ModelFirst,CodeFirst
+    private EFHelper()
+    {  
+    
+    }
+
+    /// &lt;summary&gt;
+    /// 返回当前对象实例
+    /// &lt;/summary&gt;
+    /// &lt;returns&gt;&lt;/returns&gt;
+    public static EFHelper&lt;TDataBase&gt; GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = new EFHelper&lt;TDataBase&gt;();
+        }
+        return instance;
+    }
+
+    TDataBase db = null;
+    public TDataBase GetDataContext()
+    {
+        if (db == null)
+        {
+            db = new TDataBase();
+        }
+        return db;
+    }
+
+    /// &lt;summary&gt;
+    /// 返回所有数据
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;T&quot;&gt;&lt;/typeparam&gt;
+    /// &lt;returns&gt;&lt;/returns&gt;
+    public List&lt;T&gt; GetList&lt;T&gt;() where T : class
+    {
+        //单例，创建者，观察者（发布订阅），适配器，门面，职责链，模板，工厂，抽象工厂
+        var db = GetDataContext();
+        return db.Set&lt;T&gt;().ToList();
+    }
+
+    /// &lt;summary&gt;
+    /// 根据条件查询
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;T&quot;&gt;&lt;/typeparam&gt;
+    /// &lt;param name=&quot;predicate&quot;&gt;&lt;/param&gt;
+    /// &lt;returns&gt;集合对象&lt;/returns&gt;
+    public List&lt;T&gt; GetList&lt;T&gt;(Expression&lt;Func&lt;T,bool&gt;&gt; predicate) where T:class
+    {
+        var db = GetDataContext();
+        return db.Set&lt;T&gt;().Where(predicate).ToList();
+    }
+
+    /// &lt;summary&gt;
+    /// 根据条件查询
+    /// 使用EF时必须每张表都有主键ID
+    /// EF:修改删除时必须先获取要修改的数据对象
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;T&quot;&gt;&lt;/typeparam&gt;
+    /// &lt;param name=&quot;predicate&quot;&gt;&lt;/param&gt;
+    /// &lt;returns&gt;一个对象&lt;/returns&gt;
+    public T GetSingle&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; predicate) where T : class
+    {
+        var db = GetDataContext();
+        return db.Set&lt;T&gt;().FirstOrDefault(predicate);
+    }
+
+    /// &lt;summary&gt;
+    /// 插入一个实体
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;T&quot;&gt;&lt;/typeparam&gt;
+    /// &lt;param name=&quot;Entity&quot;&gt;&lt;/param&gt;
+    /// &lt;returns&gt;&lt;/returns&gt;
+    public T InsertEntity&lt;T&gt;(T Entity) where T : class
+    {
+        var db = GetDataContext();
+        try
+        {
+            T result = db.Set&lt;T&gt;().Add(Entity);
+            db.SaveChanges();
+            return result;
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// 修改
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;T&quot;&gt;&lt;/typeparam&gt;
+    /// &lt;param name=&quot;Entity&quot;&gt;&lt;/param&gt;
+    /// &lt;returns&gt;&lt;/returns&gt;
+    public bool Update&lt;T&gt;(T Entity) where T : class
+    {
+        var db = GetDataContext();
+        var entry = db.Entry(Entity);
+        //System.Data.Entity
+        entry.State = System.Data.EntityState.Modified;
+        return db.SaveChanges() &gt; 0 ? true : false;
+    }
+
+    /// &lt;summary&gt;
+    /// 传入实体删除
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;T&quot;&gt;&lt;/typeparam&gt;
+    /// &lt;param name=&quot;Entity&quot;&gt;&lt;/param&gt;
+    /// &lt;returns&gt;&lt;/returns&gt;
+    public bool Delete&lt;T&gt;(T Entity) where T : class
+    {
+        var db = GetDataContext();
+        db.Set&lt;T&gt;().Remove(Entity);
+        return db.SaveChanges() &gt; 0 ? true : false;
+    }
+
+    /// &lt;summary&gt;
+    /// 分布查询
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;T&quot;&gt;查询的对象&lt;/typeparam&gt;
+    /// &lt;typeparam name=&quot;TKey&quot;&gt;排序字段类型&lt;/typeparam&gt;
+    /// &lt;param name=&quot;predicate&quot;&gt;查询条件&lt;/param&gt;
+    /// &lt;param name=&quot;keySelector&quot;&gt;排序字段&lt;/param&gt;
+    /// &lt;param name=&quot;pageIndex&quot;&gt;当前页数&lt;/param&gt;
+    /// &lt;param name=&quot;pageNum&quot;&gt;每页条数&lt;/param&gt;
+    /// &lt;param name=&quot;orderType&quot;&gt;排序类型，1:升序，2:降序&lt;/param&gt;
+    /// &lt;returns&gt;数据列表&lt;/returns&gt;
+    public List&lt;T&gt; GetListByPager&lt;T , TKey&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; predicate, Expression&lt;Func&lt;T, TKey&gt;&gt; keySelector, int pageIndex, int pageNum , int orderType) where T : class
+    {
+        var db = GetDataContext();
+        if (orderType == 1)
+        {
+            return db.Set&lt;T&gt;().Where(predicate).OrderBy(keySelector).Skip((pageIndex - 1) * pageNum).Take(pageNum).ToList();
+        }
+        else
+        {
+            return db.Set&lt;T&gt;().Where(predicate).OrderByDescending(keySelector).Skip((pageIndex - 1) * pageNum).Take(pageNum).ToList();
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// 使用SQL增删改
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;sqlstr&quot;&gt;&lt;/param&gt;
+    /// &lt;param name=&quot;pars&quot;&gt;&lt;/param&gt;
+    public int GetPro(string sqlstr, SqlParameter[] pars)
+    {
+        var db = GetDataContext();
+        return db.Database.ExecuteSqlCommand(sqlstr, pars);
+    }
+
+    /// &lt;summary&gt;
+    /// 使用SQL查询数据
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;T&quot;&gt;&lt;/typeparam&gt;
+    /// &lt;param name=&quot;sqlstr&quot;&gt;&lt;/param&gt;
+    /// &lt;param name=&quot;pars&quot;&gt;&lt;/param&gt;
+    /// &lt;returns&gt;&lt;/returns&gt;
+    public List&lt;T&gt; GetSqlStr&lt;T&gt;(string sqlstr, SqlParameter[] pars)
+    {
+        var db = GetDataContext();
+        return db.Database.SqlQuery&lt;T&gt;(sqlstr, pars).ToList();
+    }
+}
+</code></pre>
+<p>}</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://itwangaijava.github.io/post/mysql-luan-ma-txt/" class="post-title gt-a-link">
+                    MYsql乱码.txt
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新,记录美好生活</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+         <div>
+        @2021-2022
+    </div> 
+    </div>
+    <!-- <div>
+        Theme <a href="https://github.com/imhanjie/gridea-theme-pure" target="_blank">Pure</a>, Powered by <a
+                href="https://gridea.dev" target="_blank">Gridea</a> | <a href="https://itwangaijava.github.io/atom.xml" target="_blank">RSS</a>
+    </div> -->
+</div>
+
+<script>
+  hljs.highlightAll()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

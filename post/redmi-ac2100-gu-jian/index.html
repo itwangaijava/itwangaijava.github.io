@@ -1,0 +1,247 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>redmi ac2100固件 | itwangaijava</title>
+
+<link rel="shortcut icon" href="https://itwangaijava.github.io/favicon.ico?v=1698806005922">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itwangaijava.github.io/styles/main.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages//dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            itwangaijava
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
+                
+                <a href="/" class="menu gt-a-link">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/tags" class="menu gt-a-link">
+                    标签
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/about" class="menu gt-a-link">
+                    关于
+                </a>
+                
+            </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1698806005922"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = () => {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    redmi ac2100固件
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2022-03-27 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p>更改redmi ac2100固件版本<br>
+要想刷固件，需要将路由器的固件版本改为2.0.23。但为了防止意外，强烈建议先下载官方的路由修复器。</p>
+<p>下载路由修复器<br>
+度盘中的MIWIFIRepairTool.x86.rar压缩包，压缩可用，软件本身有使用教程</p>
+<p>下载2.0.23版本的固件<br>
+度盘中的miwifi_rm2100_all_fb720_2.0.23.bin文件</p>
+<p>下载后，登录路由器管理界面，打开常用设置-&gt;系统状态-&gt;升级检测，点击手动升级，将上面下载的2.0.23版本固件刷入路由器</p>
+<p>刷入breed<br>
+ps：如果是新路由器，个人认为不太需要检查坏块，所以本文中没相关的方法，有需要的可自行搜索</p>
+<p>打开ssh<br>
+这里，我们使用openwrt官方提供的方法打开ssh</p>
+<p>登录路由器管理界面，按f12打开开发者工具devtool，点击console，输入下列代码，并回车</p>
+<p>复制代码<br>
+`function getSTOK() {<br>
+let match = location.href.match(/;stok=(.*?)//);<br>
+if (!match) {<br>
+return null;<br>
+}<br>
+return match[1];<br>
+}</p>
+<p>function execute(stok, command) {<br>
+command = encodeURIComponent(command);<br>
+let path = <code>/cgi-bin/luci/;stok=${stok}/api/misystem/set_config_iotdev?bssid=SteelyWing&amp;user_id=SteelyWing&amp;ssid=-h%0A${command}%0A</code>;<br>
+console.log(path);<br>
+return fetch(new Request(location.origin + path));<br>
+}</p>
+<p>function enableSSH() {<br>
+stok = getSTOK();<br>
+if (!stok) {<br>
+console.error('stok not found in URL');<br>
+return;<br>
+}<br>
+console.log(<code>stok = &quot;${stok}&quot;</code>);</p>
+<pre><code>password = prompt('Input new SSH password');
+if (!password) {
+    console.error('You must input password');
+    return;
+}
+
+execute(stok, 
+</code></pre>
+<p><code>nvram set ssh_en=1 nvram commit sed -i 's/channel=.*/channel=\\&quot;debug\\&quot;/g' /etc/init.d/dropbear /etc/init.d/dropbear start</code><br>
+)<br>
+.then((response) =&gt; response.text())<br>
+.then((text) =&gt; console.log(text));<br>
+console.log('New SSH password: ' + password);<br>
+execute(stok, <code>echo -e &quot;${password}\\n${password}&quot; | passwd root</code>)<br>
+.then((response) =&gt; response.text())<br>
+.then((text) =&gt; console.log(text));<br>
+}</p>
+<p>enableSSH();`<br>
+复制代码<br>
+运行成功会返回一个弹窗，要你设置ssh的密码，输入密码点确定。默认帐号为root</p>
+<p>通过ssh连接路由器，这里推荐xshell：https://www.netsarang.com/zh/xshell/</p>
+<p>xshell可以免费使用</p>
+<p>打开xshell，新建会话，主机项填路由ip，点连接。然后输入相应的帐号密码。第一次连接会要求保存凭证，接受并保存即可。</p>
+<p>这里，暂时先告一段落，接下来是下载breed。</p>
+<p>利用winscp传入breed<br>
+下载度盘中的breed-mt7621-xiaomi-r3g.bin和WinSCP-5.17.10-Setup.exe</p>
+<p>安装winscp，新建会话，连接协议选scp，建立和路由器的连接</p>
+<p>然后将breed上传到路由器的/tmp目录（软件的两边选好路径之后，选中文件，右键点upload上传）</p>
+<p>然后，回到xshell，输入命令cd /tmp</p>
+<p>然后输入ls看看是否上传成功</p>
+<p>之后输入下面的命令将breed刷入路由器</p>
+<p>mtd -r write breed-mt7621-xiaomi-r3g.bin Bootloader<br>
+刷入之后，关闭路由器电源，按住reset，重新打开路由器电源，直到路由器的system灯变成蓝灯闪烁后，松开reset键</p>
+<p>浏览器访问192.168.1.1，可以看到breed被刷入成功</p>
+<p>点击环境变量编辑，新增两个变量</p>
+<p>字段xiaomi.r3g.bootfw，值为2</p>
+<p>刷入openwrt底包（可选）<br>
+ps：如果不想刷openwrt，不建议刷入底包</p>
+<p>下载度盘中的openwrt-ramips-mt7621-xiaomi_redmi-router-ac2100-initramfs-kernel.bin，点击breed中的固件更新</p>
+<p>勾选固件-&gt;选择文件-&gt;上传文件</p>
+<p>即可刷入openwrt低包，然后用这个临时的openwrt去刷想要的openwrt即可</p>
+<p>临时底包刷固件/breed刷固件教程：https://www.right.com.cn/forum/thread-4025861-1-1.html</p>
+<p>刷入openwrt/padavan<br>
+升级固件的方法可看上一小节</p>
+<p>openwrt可下载度盘中的03.03-openwrt-ramips-mt7621-redmi-ac2100-squashfs-sysupgrade.bin</p>
+<p>padavan可下载度盘中的RM2100_3.4.3.9-099.trx</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://itwangaijava.github.io/post/csdn-po-jie-deng-lu-fu-zhi/" class="post-title gt-a-link">
+                    csdn破解登陆复制
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新,记录美好生活</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+         <div>
+        @2021-2022
+    </div> 
+    </div>
+    <!-- <div>
+        Theme <a href="https://github.com/imhanjie/gridea-theme-pure" target="_blank">Pure</a>, Powered by <a
+                href="https://gridea.dev" target="_blank">Gridea</a> | <a href="https://itwangaijava.github.io/atom.xml" target="_blank">RSS</a>
+    </div> -->
+</div>
+
+<script>
+  hljs.highlightAll()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
